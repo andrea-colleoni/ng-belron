@@ -1,0 +1,22 @@
+<div>
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Filiale</th>
+          <th>Processo</th>
+          <th>Esito</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let evento of eventi">
+              <td>{{evento.data | date:'dd/MM/yyyy'}}</td>
+              <td>{{evento.filiale.nome}}</td>
+              <td>{{evento.processo.nome}}</td>
+              <td>{{evento.esito}}</td>
+              <td>{{evento.note}}</td>
+            </tr>
+      </tbody>
+    </table>
+  </div>
