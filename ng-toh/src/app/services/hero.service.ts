@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../model/hero';
 import { HEROES } from '../model/mock-heroes';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { MessagesService } from './messages.service';
 
 @Injectable({
@@ -9,14 +9,28 @@ import { MessagesService } from './messages.service';
 })
 export class HeroService {
 
-  heroes = HEROES;
+  heroes: Subject<Hero[]>;
 
   constructor(
     private ms: MessagesService
-  ) { }
+  ) {
+    this.heroes = new Subject<Hero[]>();
+  }
 
-  getHeroes(): Observable<Hero[]> {
+  subscribeHeroes(): Observable<Hero[]> {
+    return this.heroes;
+  }
+
+  loadHeroes() {
     this.ms.add('lettura array degli eroi');
-    return of(this.heroes);
+    this.heroes.next(HEROES);
+  }
+
+  filtra() {
+    this.heroes.next(HEROES.filter((v) => true));
+  }
+
+  getHero(id: number): Hero {
+    return HEROES.find(h => h.id === id);
   }
 }

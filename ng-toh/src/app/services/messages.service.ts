@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessagesService {
 
-  constructor() { }
+  messages: Subject<string>;
 
-  messages: string[] = [];
+  constructor() {
+    this.messages = new Subject<string>();
+  }
 
   add(message: string) {
-    this.messages.push(message);
+    this.messages.next(message);
   }
 
+  /*
   clear() {
-    this.messages = [];
+    // this.messages = [];
+    // questo svuota l'array senza modificarne il puntatore
+    this.messages.length = 0;
   }
+  */
 }

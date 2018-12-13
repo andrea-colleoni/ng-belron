@@ -8,11 +8,18 @@ import { MessagesService } from '../services/messages.service';
 })
 export class MessagesComponent implements OnInit {
 
+  messaggi: string[] = [];
+
   constructor(
     private ms: MessagesService,
   ) { }
 
   ngOnInit() {
+    this.ms.messages.subscribe((s) => this.messaggi.push(s));
+  }
+
+  clear() {
+    this.messaggi.length = 0;
   }
 
 }
