@@ -1,0 +1,9 @@
+<p>Cerca: <input #searchTerm (input)="cerca(searchTerm.value)"></p>
+<div *ngIf="posts | async">
+  <div *ngFor="let post of posts | async">
+    <h3>{{post.title}}</h3>
+    <p>{{post.abstract}}</p>
+    <a routerLink="/post/{{post.id}}"> Modifica </a>
+    <button (click)="modifica(post.id)"> Modifica </button>
+  </div>
+</div>

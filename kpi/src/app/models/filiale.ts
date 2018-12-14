@@ -1,4 +1,6 @@
+import { identifierModuleUrl } from '@angular/compiler';
+
 export class Filiale {
-    id: number;
+    id: string;
     nome: string;
 }

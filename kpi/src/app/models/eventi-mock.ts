@@ -5,7 +5,7 @@ export const EVENTI: EventoKPI[] = [
         data: new Date('2018-12-12'),
         esito: true,
         filiale: {
-            id: 1,
+            id: '1',
             nome: 'Milano'
         },
         note: 'Tutto ok',
@@ -17,7 +17,7 @@ export const EVENTI: EventoKPI[] = [
         data: new Date('2018-12-11'),
         esito: false,
         filiale: {
-            id: 2,
+            id: '2',
             nome: 'Bergamo'
         },
         note: 'Tutto ok',
@@ -29,7 +29,7 @@ export const EVENTI: EventoKPI[] = [
         data: new Date('2018-12-11'),
         esito: false,
         filiale: {
-            id: 2,
+            id: '2',
             nome: 'Bergamo'
         },
         note: 'Tutto ok',

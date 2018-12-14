@@ -1,0 +1,11 @@
+<div *ngIf="post">
+  <p>
+    <label for="title">Titolo</label>
+    <input [(ngModel)]="post.title">
+  </p>
+  <p>
+    <label for="body">Testo</label>
+    <textarea rows="4" cols="60" [(ngModel)]="post.body"></textarea>
+  </p>
+  <p><button (click)="salva()">Salva</button></p>
+</div>
