@@ -3,9 +3,9 @@ import { Filiale } from './filiale';
 import { Processo } from './processo';
 
 export class EventoKPI {
-    data: Date;
-    filiale: Filiale;
-    processo: Processo;
+    data?: Date;
+    filiale: string;
+    processo: string;
     esito: boolean;
     note: string;
 }

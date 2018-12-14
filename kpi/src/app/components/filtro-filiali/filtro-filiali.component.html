@@ -1,5 +1,0 @@
-<label for="sel-filiale">Filiale</label>
-  <select id="sel-filiale" [(ngModel)]="filialeSelezionata" (change)="applica()">
-    <option [ngValue]="undefined">-- Nessun filtro per filiale --</option>
-    <option *ngFor="let filiale of filiali" [ngValue]="filiale">{{filiale.nome}}</option>
-  </select>

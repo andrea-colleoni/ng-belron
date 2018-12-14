@@ -1,22 +1,29 @@
 <div>
-  <p-table #dt [value]="eventi" [paginator]="true" [rows]="10">
+  <p-table #dt [value]="eventi | async" [paginator]="true" [rows]="10">
     <ng-template pTemplate="header">
       <tr>
         <th>Data</th>
-        <th>Filiale</th>
+        <th [pSortableColumn]="'filiale'">
+            Filiale <p-sortIcon [field]="'filiale'"></p-sortIcon>
+        </th>
         <th>Processo</th>
         <th>Esito</th>
         <th>Note</th>
       </tr>
       <tr>
         <th>
-            <p-slider [(ngModel)]="[0, 100]" [range]="true" (onChange)="onDateChange($event, dt)"></p-slider>
+            <!-- p-slider [(ngModel)]="[0, 100]" [range]="true" (onChange)="onDateChange($event, dt)"></p-slider -->
         </th>
         <th>
-          <p-dropdown [options]="filiali" (onChange)="dt.filter($event.value, 'filiale.id', 'equals')"></p-dropdown>
+          <p-dropdown 
+              *ngIf="filiali" 
+              [options]="filiali" 
+              (onChange)="dt.filter($event.value, 'filiale', 'equals')"></p-dropdown>
         </th>
         <th>
-          <p-dropdown [options]="processi" (onChange)="dt.filter($event.value, 'processo.nome', 'equals')"></p-dropdown>
+          <p-dropdown 
+              [options]="processi" 
+              (onChange)="dt.filter($event.value, 'processo', 'equals')"></p-dropdown>
         </th>
         <th>
           <p-dropdown [options]="esiti" (onChange)="dt.filter($event.value, 'esitoStr', 'equals')"></p-dropdown>
@@ -27,8 +34,8 @@
     <ng-template pTemplate="body" let-evento>
       <tr>
         <td>{{evento.data | date:'dd/MM/yyyy'}}</td>
-        <td>{{evento.filiale.nome}}</td>
-        <td>{{evento.processo.nome}}</td>
+        <td>{{evento.filiale}}</td>
+        <td>{{evento.processo}}</td>
         <td>
           <img *ngIf="evento.esito" height="32" src="/assets/images/green_light.png">
           <img *ngIf="!evento.esito" height="32" src="/assets/images/red_light.png">

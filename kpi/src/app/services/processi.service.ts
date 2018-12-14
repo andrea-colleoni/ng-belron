@@ -1,17 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { Processo } from '../models/processo';
 import { PROCESSI } from '../models/processi-mock';
-import { Filtro } from '../models/filtro';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+
+const urlProc = '/Processi';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessiService {
 
-  constructor() { }
+  private processi: Subject<Processo[]>;
 
-  getProcessi(): Observable<Processo[]> {
-    return of(PROCESSI);
+  constructor(
+    private http: HttpClient
+  ) {
+    this.processi = new Subject<Processo[]>();
+  }
+
+  get observableProcessi(): Observable<Processo[]> {
+    return this.processi;
+  }
+
+  getProcessi() {
+    this.loadAllProcessi()
+      .subscribe(
+        arFil => this.processi.next(arFil)
+    );
+  }
+
+  private loadAllProcessi(): Observable<Processo[]> {
+    return this.http.get<Processo[]>(environment.apiUrl + urlProc)
+      .pipe(
+        map(arFil => arFil.map(fil => Object.assign(new Processo(), fil)))
+        // TODO: gestione errore
+      );
   }
 }

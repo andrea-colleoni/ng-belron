@@ -1,5 +1,0 @@
-<label for="sel-processo">Processo</label>
-<select id="sel-processo" (change)="applica()">
-  <option>-- Nessun filtro per processo --</option>
-  <option *ngFor="let processo of processi" value="{{processo.nome}}">{{processo.nome}}</option>
-</select>

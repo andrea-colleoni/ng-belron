@@ -1,32 +1,39 @@
 import { Injectable } from '@angular/core';
 import { EventoKPI } from '../models/evento-kpi';
 import { Observable, of, Subject } from 'rxjs';
-import { EVENTI } from '../models/eventi-mock';
-import { Filtro } from '../models/filtro';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
+const urlLog = '/Log';
 @Injectable({
   providedIn: 'root'
 })
 export class EventiService {
 
-  filtro?: Filtro;
-  eventi = new Subject<EventoKPI[]>();
+  private eventi = new Subject<EventoKPI[]>();
 
   constructor(
+    private http: HttpClient
   ) { }
 
   loadEventi() {
-    this.filtro = new Filtro();
-    this.eventi.next(EVENTI);
+    this.loadAllEventi()
+      .subscribe(
+        arLog => this.eventi.next(arLog)
+    );
   }
 
-  applicaFiltro() {
-    console.log(this.filtro);
-    if (this.filtro) {
-      this.eventi.next(EVENTI.filter((e) =>
-        !!this.filtro.filiale && e.filiale.id === this.filtro.filiale.id ||
-        !!this.filtro.processo && e.processo.nome === this.filtro.processo.nome ||
-        this.filtro.esito !== undefined && e.esito === this.filtro.esito));
-    }
+  get observableEventi(): Observable<EventoKPI[]> {
+    return this.eventi;
   }
+
+  private loadAllEventi(): Observable<EventoKPI[]> {
+    return this.http.get<EventoKPI[]>(environment.apiUrl + urlLog)
+      .pipe(
+        map(arLog => arLog.map(log => Object.assign(new EventoKPI(), log, { esitoStr: (log.esito ? 'ok' : 'ko') })))
+        // TODO: gestione errore
+      );
+  }
+
 }

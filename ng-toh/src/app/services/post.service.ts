@@ -24,6 +24,7 @@ export class PostService {
         debounceTime(500),
         distinctUntilChanged()
       )
+      // sottoscrivo l'esito del searchTerm per ricaricare i post
       .subscribe(
         t => {
           console.log(`eseguo ricerca di ${t}`);
