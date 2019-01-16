@@ -4,3 +4,12 @@
 <a routerLink="/posts"> Posts </a>
 <router-outlet></router-outlet>
 <app-messages></app-messages>
+<p appHighlight highlightColor="lightgreen">Highlight me!</p>
+<!-- <p appHighlight [highlightColor]="'cyan'">Highlight me!</p> -->
+<p appHighlight="orange">Highlight me!</p>
+
+
+<p *appUnless="true">INVISIBILE</p>
+<p *appUnless="false">VISIBILE</p>
+
+<app-ad-banner [ads]="ads"></app-ad-banner>
