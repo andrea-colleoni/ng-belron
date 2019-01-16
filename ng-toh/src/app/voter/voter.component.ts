@@ -13,6 +13,10 @@ export class VoterComponent {
   @Output() voted = new EventEmitter<boolean>();
   didVote = false;
 
+  constructor() {
+    console.log(this.name);
+  }
+
   vote(agreed: boolean) {
     this.voted.emit(agreed);
     this.didVote = true;

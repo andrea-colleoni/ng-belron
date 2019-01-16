@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
   title = 'Tour degli Eroi';
   ads: AdItem[];
 
+  birthday = new Date(1990, 1, 15);
+
   constructor(private adService: AdService) {}
 
   ngOnInit() {

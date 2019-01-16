@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class PostsComponent implements OnInit {
 
   // posts: Post[];
-  private posts: Observable<Post[]>;
+  posts: Observable<Post[]>;
 
   constructor(
     private ps: PostService,

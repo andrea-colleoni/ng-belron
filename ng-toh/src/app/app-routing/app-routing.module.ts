@@ -10,6 +10,9 @@ import { VoteTakerComponent } from '../vote-taker/vote-taker.component';
 import { CountdownTimerComponent } from '../countdown-timer/countdown-timer.component';
 import { CountdownLocalVarParentComponent } from '../countdown-local-var-parent/countdown-local-var-parent.component';
 import { AdBannerComponent } from '../ad-banner/ad-banner.component';
+import { PadreComponent } from '../padre/padre.component';
+import { TimerComponent } from '../timer/timer.component';
+import { DialogComponent } from '../dialog/dialog.component';
 
 const routes: Routes = [
   { path: 'heroes', component: HeroesComponent },
@@ -19,8 +22,11 @@ const routes: Routes = [
   { path: 'posts', component: PostsComponent },
   { path: 'post/:id', component: PostDetailComponent },
   { path: 'vote', component: VoteTakerComponent },
-  { path: 'timer', component: CountdownLocalVarParentComponent },
+  // { path: 'timer', component: CountdownLocalVarParentComponent },
   { path: 'banner', component: AdBannerComponent },
+  { path: 'lc', component: PadreComponent },
+  { path: 'timer', component: TimerComponent },
+  { path: 'dialog', component: DialogComponent },
 ];
 
 @NgModule({
